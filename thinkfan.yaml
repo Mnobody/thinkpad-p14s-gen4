@@ -1,0 +1,16 @@
+sensors:
+  - tpacpi: /proc/acpi/ibm/thermal
+fans:
+  - tpacpi: /proc/acpi/ibm/fan
+
+# Simple mode: each entry is a [FANSPEED, LOWER_LIMIT, UPPER_LIMIT] tuple.
+levels:
+  - [0, 0,  42]
+  - [1, 42, 63]
+  - [2, 63, 70]
+  - [3, 70, 77]
+  - [4, 77, 84]
+  - [5, 84, 90]
+  - [6, 90, 94]
+  - [7, 94, 99]
+  - [127, 94, 3276]
