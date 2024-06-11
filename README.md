@@ -112,7 +112,55 @@ Other possible [solution](https://forums.lenovo.com/t5/ThinkPad-P-and-W-Series-M
 
 ## CPU Power
 
-TODO:
+### Install tools
+Install Stress Terminal UI and stress tool:
+```sh
+sudo apt install s-tui stress
+```
+
+Start s-tui (`sudo` required for power usage info):
+```sh
+sudo s-tui
+```
+
+### Fix tools :)
+
+If you don't see frequencies charts apply next fix:
+```sh
+sudo apt install python3-psutil
+```
+next go to `/usr/lib/python3/dist-packages/psutil/_pslinux.py` or `/usr/lib/python3.10/site-packages/psutil/_pslinux.py`
+and change line `752` as shown [here](https://github.com/giampaolo/psutil/commit/83d7067d7568f09ad95f094d17731e643a4a7ce6).
+For more information visit this [issue page](https://github.com/amanusk/s-tui/issues/186).
+
+### Static fix
+
+Apply `static fix` for CPU Power.
+
+```sh
+sudo apt install acpi
+```
+
+Create a directory, for example:
+```sh
+mkdir ~/thinkpad-cpu-fix && mkdir ~/thinkpad-cpu-fix/powerlimit
+```
+
+Copy `powerlimit.sh` and `refresh.sh` to `~/thinkpad-cpu-fix/powerlimit` and make them executable:
+```sh
+sudo chmod +x powerlimit.sh refresh.sh
+```
+
+In `powerlimitfix.service` replace `<USERNAME>` with your user name and copy file `powerlimitfix.service` to `/etc/systemd/system`
+
+Start and enable service on reboot:
+```sh
+sudo systemctl daemon-reload
+sudo systemctl start powerlimitfix.service
+sudo systemctl enable powerlimitfix.service
+```
+
+---
 
 List of contents:
 - https://github.com/whoenig/thinkpad-p14s-gen2-ubuntu

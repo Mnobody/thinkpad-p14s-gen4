@@ -1,0 +1,11 @@
+[Unit]
+Description=Sets watt limit every 3 seconds if on AC
+
+[Service]
+User=root
+WorkingDirectory=/home/<USERNAME>/thinkpad-cpu-fix/powerlimit
+ExecStart=sh refresh.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
